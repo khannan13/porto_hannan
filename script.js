@@ -1358,3 +1358,47 @@ console.log(
     let t;
     window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(fit, 120); });
 })();
+
+/* ==========================================================
+   PROYEK VIDEO: cover opsional, putar YouTube di tempat, tombol link
+========================================================== */
+(function () {
+    "use strict";
+    const idOf = u => {
+        const m = String(u || "").match(/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);
+        return m ? m[1] : null;
+    };
+    document.querySelectorAll(".project-card--video").forEach(card => {
+        const raw = card.dataset.youtube || "";
+        const id = /GANTI/i.test(raw) ? null : idOf(raw);
+        const yt = card.querySelector("[data-yt-link]");
+        const gh = card.querySelector("[data-gh-link]");
+        const thumb = card.querySelector(".video-thumb");
+        if (gh && /GANTI/.test(gh.getAttribute("href") || "")) gh.hidden = true;
+        if (yt) { if (id) yt.href = "https://www.youtube.com/watch?v=" + id; else yt.hidden = true; }
+        if (!thumb) return;
+        const img = thumb.querySelector("img");
+        if (img && card.dataset.cover) {
+            img.src = card.dataset.cover;
+            thumb.classList.remove("is-blank");
+        } else if (img && id && card.dataset.ytThumb === "auto") {
+            img.src = "https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg";
+            img.addEventListener("error", () => { img.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"; }, { once: true });
+            thumb.classList.remove("is-blank");
+        }
+        if (!id) { thumb.classList.add("no-play"); return; }
+        thumb.href = "https://www.youtube.com/watch?v=" + id;
+        thumb.target = "_blank"; thumb.rel = "noopener noreferrer";
+        thumb.addEventListener("click", e => {
+            e.preventDefault();
+            const f = document.createElement("iframe");
+            f.className = "video-frame";
+            f.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+            f.title = "Video presentasi proyek";
+            f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+            f.allowFullscreen = true;
+            thumb.style.display = "none";
+            thumb.parentNode.appendChild(f);
+        });
+    });
+})();
