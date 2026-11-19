@@ -3938,3 +3938,42 @@ body.dark .hero h1.hero-giant { color: rgb(238, 230, 215); }
 .id-person, .id-person-shadow { width: 104%; left: -2%; }
 .id-person { clip-path: inset(-20% 5.6% 0 5.6% round 0 0 12px 12px); }
 .id-person-shadow { clip-path: inset(-20% 5.6% 0 5.6%); }
+
+/* ==========================================================
+   PROYEK DENGAN VIDEO YOUTUBE + GITHUB
+========================================================== */
+.project-card--video .project-placeholder { width: 76%; aspect-ratio: 16 / 9; }
+.video-thumb { position: relative; display: block; width: 100%; height: 100%; background: #191713; overflow: hidden; }
+.video-thumb img { width: 100%; height: 100%; object-fit: cover; background: #191713; display: block; transition: transform .5s ease; }
+.project-card:hover .video-thumb img { transform: scale(1.04); }
+.video-play {
+    position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; border-radius: 50%;
+    display: grid; place-items: center; padding-left: 4px; font-size: 1.1rem;
+    background: var(--bg); color: var(--ink); box-shadow: 0 8px 24px rgba(10, 10, 6, .35); transition: transform .25s;
+}
+.video-thumb:hover .video-play { transform: scale(1.1); }
+.video-empty { display: none; }
+.video-thumb.is-empty { display: grid; place-items: center; background: var(--paper); }
+.video-thumb.is-empty img, .video-thumb.is-empty .video-play { display: none; }
+.video-thumb.is-empty .video-empty { display: block; padding: 20px; text-align: center; font-size: .8rem; line-height: 1.6; color: var(--muted); }
+.video-frame { width: 100%; height: 100%; border: 0; display: block; }
+@media (min-width: 701px) { .project-card--reverse .project-image { order: 2; } }
+.project-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); }
+.pill-btn {
+    display: inline-flex; align-items: center; gap: 9px; padding: 12px 20px; border-radius: 999px;
+    border: 1px solid var(--ink); font-size: .78rem; font-weight: 600;
+    transition: transform .2s, background .2s, color .2s;
+}
+.pill-btn i { font-size: 1.05em; }
+.pill-btn--solid { background: var(--ink); color: var(--bg); }
+.pill-btn--line { background: transparent; color: var(--ink); }
+.pill-btn--line:hover { background: var(--ink); color: var(--bg); }
+.pill-btn:hover { transform: translateY(-2px); }
+.pill-btn[hidden] { display: none; }
+
+
+/* cover kosong + tombol play kontras */
+.video-thumb.is-blank { background: var(--paper); }
+.video-thumb.is-blank img, .video-thumb.no-play .video-play { display: none; }
+.video-thumb.is-blank .video-play { background: var(--ink); color: var(--bg); }
+.video-thumb:not([href]) { cursor: default; }
