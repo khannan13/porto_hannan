@@ -3977,3 +3977,33 @@ body.dark .hero h1.hero-giant { color: rgb(238, 230, 215); }
 .video-thumb.is-blank img, .video-thumb.no-play .video-play { display: none; }
 .video-thumb.is-blank .video-play { background: var(--ink); color: var(--bg); }
 .video-thumb:not([href]) { cursor: default; }
+
+/* ==========================================================
+   COVER PROYEK: screenshot landscape + bingkai HP untuk screenshot potret
+========================================================== */
+.project-card--video .project-placeholder { aspect-ratio: 16 / 10; }
+.video-thumb img { object-position: top center; }
+.video-thumb:not(.is-blank)::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(rgba(10, 10, 6, 0), rgba(10, 10, 6, .22));
+}
+.video-thumb:not(.is-blank) .video-play { z-index: 1; }
+.video-thumb[href] { cursor: pointer; }
+
+.project-card--phone .project-placeholder {
+    width: auto; aspect-ratio: auto; padding: 0; background: transparent; border: 0;
+    box-shadow: none; transform: none !important;
+}
+.project-card--phone .video-thumb {
+    width: 204px; height: 440px; border: 8px solid #191713; border-radius: 36px;
+    box-shadow: 10px 12px 0 var(--accent);
+    transition: transform .3s ease;
+}
+.project-card--phone:hover .video-thumb { transform: translateY(-4px); }
+.project-card--phone .video-thumb img { object-position: center; }
+@media (max-width: 700px) {
+    .project-card--phone .project-image { min-height: 440px; }
+    .project-card--phone .video-thumb { width: 159px; height: 340px; border-width: 7px; border-radius: 30px; }
+}
+
+.project-card--phone .project-placeholder { overflow: visible; }
