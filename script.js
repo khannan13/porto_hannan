@@ -1380,13 +1380,18 @@ console.log(
         const img = thumb.querySelector("img");
         if (img && card.dataset.cover) {
             img.src = card.dataset.cover;
+            img.alt = thumb.getAttribute("aria-label") || "";
             thumb.classList.remove("is-blank");
         } else if (img && id && card.dataset.ytThumb === "auto") {
             img.src = "https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg";
             img.addEventListener("error", () => { img.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"; }, { once: true });
             thumb.classList.remove("is-blank");
         }
-        if (!id) { thumb.classList.add("no-play"); return; }
+        if (!id) {
+            thumb.classList.add("no-play");
+            if (gh && !gh.hidden) { thumb.href = gh.href; thumb.target = "_blank"; thumb.rel = "noopener noreferrer"; }
+            return;
+        }
         thumb.href = "https://www.youtube.com/watch?v=" + id;
         thumb.target = "_blank"; thumb.rel = "noopener noreferrer";
         thumb.addEventListener("click", e => {
