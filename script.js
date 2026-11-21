@@ -1381,6 +1381,10 @@ console.log(
         if (img && card.dataset.cover) {
             img.src = card.dataset.cover;
             img.alt = thumb.getAttribute("aria-label") || "";
+            img.addEventListener("error", () => {
+                img.removeAttribute("src"); img.alt = "";
+                thumb.classList.add("is-blank");
+            }, { once: true });
             thumb.classList.remove("is-blank");
         } else if (img && id && card.dataset.ytThumb === "auto") {
             img.src = "https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg";
