@@ -4007,3 +4007,23 @@ body.dark .hero h1.hero-giant { color: rgb(238, 230, 215); }
 }
 
 .project-card--phone .project-placeholder { overflow: visible; }
+
+
+/* ==========================================================
+   COVER SNAPHAN BISA DIKLIK
+========================================================== */
+.project-cover-link { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; cursor: pointer; }
+.project-cover-link img { transition: transform .5s ease; }
+.project-cover-link:hover img, .project-cover-link:focus-visible img { transform: scale(1.03); }
+.cover-badge {
+    position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 15px; border-radius: 999px; background: var(--ink); color: var(--bg);
+    font-size: .72rem; font-weight: 600; letter-spacing: .02em;
+    opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease;
+}
+.project-cover-link:hover .cover-badge, .project-cover-link:focus-visible .cover-badge { opacity: 1; transform: none; }
+.project-cover-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@media (hover: none) { .cover-badge { opacity: 1; transform: none; } }
+
+/* ikon sosial di bawah Contact berdampingan */
+.contact-meta > div { display: flex; align-items: center; gap: 10px; }
